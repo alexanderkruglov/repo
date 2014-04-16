@@ -61,6 +61,18 @@ addfigures();
 $("img").draggable({
 containment:"#board"
 });
+$("div").droppable({
+	drop: function(event, ui) {
+        var dropped = ui.draggable;
+        var droppedOn = $(this);
+     
+        $(dropped).detach().css({top: 0, left: 0}).appendTo(droppedOn); 
+    }
+});   
+/*if ($("div").find("img").length!=0) {
+droppable("disable"); }*/
+
+
 }); 
 
 
