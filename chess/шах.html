@@ -18,8 +18,6 @@ function addBoard() {
 
 }
 
-
-
 function addfigures() {
 
 cell1 = $('.t_kl');
@@ -51,10 +49,7 @@ cell2= $('.s_kl');
 
  cell1.slice(29,30).append('<img src="figures/light/White_K.ico">');
  cell2.slice(30,31).append('<img src="figures/light/White_Q.ico">');
-
-
  }
-
 $(document).ready(function(){
 addBoard();
 addfigures();
@@ -64,30 +59,14 @@ containment:"#board"
 $("div").droppable({
 	drop: function(event, ui) {
         var dropped = ui.draggable;
-        var droppedOn = $(this);
-     
+        var droppedOn = $(this);     
         $(dropped).detach().css({top: 0, left: 0}).appendTo(droppedOn); 
     }
 });   
-/*if ($("div").find("img").length!=0) {
-droppable("disable"); }*/
-
-
 }); 
-
-
-
-
-
 </script>
-
 </head>
  <body>
-
-
-
  <div id="board"></div>
-
  </body>
-
  </html>
