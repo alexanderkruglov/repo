@@ -1,0 +1,40 @@
+<html>
+<body>
+<script>
+var Object = {
+	key1: "y",
+	key2: "t",
+	key3: object = {
+		key1: "p",
+		key2: object1 = {
+			key1:"n",
+			key2:4
+			
+	}
+	}
+};
+var level=0;
+function func (innerobj) {
+
+
+console.log("level " +level +":");
+for (t in  innerobj) {
+	if (typeof innerobj[t] != 'object') {
+
+console.log(innerobj[t]);
+
+
+}
+else  {
+level++;
+	func (innerobj[t]);
+
+}
+}
+level=0;
+}
+
+
+</script>
+</body>
+</html>
