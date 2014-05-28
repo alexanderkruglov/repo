@@ -11,6 +11,7 @@ $(document).ready(function(){
 
     $('.block').on('click',function(){
         if ($(this).attr('color')==thisteam.current){
+		DropAllowedStep();
             SelectCell($(this));
             if ($selectedCell.attr('type')=='pawn'){
                 PawnStep();
@@ -148,6 +149,7 @@ Shah();
         thisteam.current='white';
         thisteam.enemy='black';
     }
+	Mat();
 }
 
 var $selectedCell;
@@ -155,7 +157,7 @@ var is_selected=false;
 
 function SelectCell(cell){
     is_selected = true;
-    DropAllowedStep();
+   // DropAllowedStep();
     if( $selectedCell !=null){
         $selectedCell.toggleClass('active');
     }
@@ -422,6 +424,54 @@ DropAllowedStep()
 
 }
 function Mat() {
+    
+    $myTeam = $('div[color="'+thisteam.current +'"]')
+    $myTeam.each(function () {
+        if ($(this).attr('color')==thisteam.current){
+            SelectCell($(this));
+            if ($selectedCell.attr('type')=='pawn'){
+                PawnStep();
+            }
+            if ($selectedCell.attr('type')=='Rook'){
+                RookStep();
+            }
+            if ($selectedCell.attr('type')=='Bishop'){
+                BishopStep(-1,1,-1,8); //северо-восток
+                BishopStep(-1,-1,-1,-1); //северо-запад
+                BishopStep(1,1,8,8); //юго-восток
+                BishopStep(1,-1,8,-1);//юго-запад
+            }
+            if ($selectedCell.attr('type')=='Queen'){
+                BishopStep(-1,1,-1,8); //северо-восток
+                BishopStep(-1,-1,-1,-1); //северо-запад
+                BishopStep(1,1,8,8); //юго-восток
+                BishopStep(1,-1,8,-1);//юго-запад
+                RookStep();
+            }
+            if ($selectedCell.attr('type')=='Knight'){
+               KnightStep(-2, -1); 
+                KnightStep(-2, 1);
+                KnightStep(2, 1);
+                KnightStep(2, -1);
+                KnightStep(-1, 2);
+                KnightStep(1, 2);
+                KnightStep(-1, -2);
+                KnightStep(1, -2); 
+            }
+            if ($selectedCell.attr('type')=='King'){
+                KingStep()
+            }
+        }
+    })
+    var king=($('div[type="King"]'+'[color="'+thisteam.enemy+'"]'));
+    if (king.hasClass('allowedStep')){
+        DropAllowedStep();
+        alert('Mat! '+thisteam.current+' win');
+location.reload();
+    }
+    $selectedCell.removeClass('active');
+    $selectedCell=null;
+   DropAllowedStep()
 }
 	
 </script>
